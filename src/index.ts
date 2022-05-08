@@ -1,10 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import apis from './routes/apis';
+import swaggerUi from 'swagger-ui-express';
+import docs from './swagger.json';
+
 import 'dotenv/config';
 
 
+
+
+
 const app = express();
+
+
+
 
 
 /*
@@ -19,6 +28,7 @@ app.use(express.urlencoded({ extended: true}));
 
 //As apis entram aqui
 app.use(apis)
+app.use('/docs',swaggerUi.serve,swaggerUi.setup(docs))
 
 // console.log(process.env)
 

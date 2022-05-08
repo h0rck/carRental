@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 // import bcrypt from 'bcryptjs';
 import jwt    from 'jsonwebtoken';
-import {UserModel} from '../../databases/models/User';
+import {UsuariosModel} from '../../databases/models/Usuario';
 import bcrypt   from 'bcryptjs';
 
 export default (() => {
@@ -13,7 +13,7 @@ export default (() => {
 
 
     async function all(req: Request, res:Response){
-        const users = await UserModel.findAll();
+        const users = await UsuariosModel.findAll();
         return res.send(users);
     }
 
@@ -22,7 +22,7 @@ export default (() => {
         // try{
             const {nome,email,senha} = req.body;
 
-            const data = await UserModel.create({
+            const data = await UsuariosModel.create({
                 nome,
                 email,
                 senha : await bcrypt.hash(senha, 2)
@@ -40,7 +40,7 @@ export default (() => {
     async function authenticate (req:Request, res:Response) {
         // try{
             const {email, senha} = req.body;
-            const data = await UserModel.findOne({where: {email}});
+            const data = await UsuariosModel.findOne({where: {email}});
 
             if(!data) return res.status(404).send({error:'Usuário não encontrado'})
 

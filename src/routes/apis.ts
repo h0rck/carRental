@@ -9,9 +9,9 @@ export default (() => {
 
     const api:Router = Router();
 
-    api.get('/all', authController.all);
-    api.post('/register', authController.register);
-    api.post('/authenticate', authController.authenticate);
+    api.get('/user/all', authController.all);
+    api.post('/user/register', authController.register);
+    api.post('/user/authenticate', authController.authenticate);
 
 
     // api.use(authMiddleware);

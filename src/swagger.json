@@ -1,0 +1,51 @@
+{
+  "openapi":"3.0.0",
+  "info": {
+    "title": "Alguel de carros",
+    "description": "Essa API faz o aluguel de carros",
+    "termsOfService":"http:localhost:3000",
+    "contact": {
+      "email":"samukarp@outlook.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url":"http:localhost:3000",
+      "description":"DEV"
+    }
+  ],
+  "paths": {
+    "/products":{
+      "post":{
+        "summary": "Cadastro de produto",
+        "description": "Essa rota será responsável por cadastrar um novo produto",
+        "tags":["Products"],
+        "requestBody":{
+          "content":{
+            "applicaation/json":{
+              "schema":{
+                  "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "schemas":{
+      "Product":{
+        "name":{
+          "type":"string"
+        },
+        "email":{
+          "type": "string"
+        },
+        "senha": {
+          "type":"string"
+        }
+      }
+    }
+  }
+}

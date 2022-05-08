@@ -1,16 +1,15 @@
 import Sequelize, {Model} from 'sequelize';
 import {sequelize} from '../db';
-import bcrypt   from 'bcryptjs';
 
 
-class User extends Model {
+class  Usuarios extends Model {
   declare id:    number;
   declare nome:  string;
   declare email: string;
   declare senha: string;
 }
 
-export const UserModel = User.init(
+export const UsuariosModel =  Usuarios.init(
     {
         id: {
             type: Sequelize.INTEGER,
@@ -31,7 +30,7 @@ export const UserModel = User.init(
             allowNull: false,
         }
     },{
-    tableName: 'user',
+    tableName: 'Usuarios',
     sequelize,
   });
 
