@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 // import bcrypt from 'bcryptjs';
 import jwt    from 'jsonwebtoken';
-import {UsuariosModel} from '../../databases/models/Usuario';
+import {UsuariosModel} from '../../databases/models/Usuarios';
 import bcrypt   from 'bcryptjs';
 
 export default (() => {

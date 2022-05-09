@@ -1,14 +1,16 @@
 import Sequelize, {Model} from 'sequelize';
 import {sequelize} from '../db';
+import { CarrosModel } from './Carros';
+import { UsuariosModel } from './Usuarios';
 
 
-class Carros extends Model {
+class  Aluguel extends Model {
   declare id:    number;
   declare idUsuario: number;
   declare idCarro:  number;
 }
 
-export const CarrosModel = Carros.init(
+export const AluguelModel =  Aluguel.init(
     {
         id: {
             type: Sequelize.INTEGER,
@@ -19,8 +21,8 @@ export const CarrosModel = Carros.init(
         idUsuario: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            references: {         // User belongsTo Company 1:1
-                model: 'Usuario',
+            references: {
+                model: UsuariosModel,
                 key: 'id'
           }
         },
@@ -28,12 +30,15 @@ export const CarrosModel = Carros.init(
           type: Sequelize.INTEGER,
           allowNull: false,
           primaryKey: true,
-          references: {         // User belongsTo Company 1:1
-              model: 'Carros',
+          references: {
+              model: CarrosModel,
               key: 'id'
           }
         },
     },{
-    tableName: 'Carros',
+    tableName: 'Aluguel',
     sequelize,
   });
+
+AluguelModel.hasMany(UsuariosModel, {foreignKey:'id'})
+AluguelModel.hasMany(CarrosModel, {foreignKey:'id'})

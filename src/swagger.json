@@ -16,16 +16,56 @@
     }
   ],
   "paths": {
-    "/products":{
+    "/user/register":{
       "post":{
         "summary": "Cadastro de produto",
         "description": "Essa rota será responsável por cadastrar um novo produto",
-        "tags":["Products"],
+        "tags":["Usuarios"],
         "requestBody":{
           "content":{
             "applicaation/json":{
               "schema":{
-                  "$ref": "#/components/schemas/Product"
+                  "$ref": "#/components/schemas/Usuarios"
+              },
+              "examples":{
+                "Usuarios": {
+                  "value": {
+                    "name": "Samuel Ribeiro",
+                    "email":"samukarp@outlook.com",
+                    "senha": "asd123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401":{
+            "description": "Não autorizado"
+          },
+          "400":{
+            "description": ""
+          },
+          "200":{
+            "description":"OK",
+            "content": {
+              "applicaation/json":{
+                "schema":{
+                  "items":{
+                    "type":"object",
+                    "user":{
+                      "name":{
+                        "type":"string"
+                      },
+                      "email":{
+                        "type": "string"
+                      }
+                    },
+                    "token":{
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }
@@ -35,7 +75,8 @@
   },
   "components":{
     "schemas":{
-      "Product":{
+      "Usuarios":{
+        "type":"object",
         "name":{
           "type":"string"
         },

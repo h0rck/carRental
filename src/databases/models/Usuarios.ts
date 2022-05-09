@@ -1,5 +1,6 @@
 import Sequelize, {Model} from 'sequelize';
 import {sequelize} from '../db';
+import { AluguelModel } from './Aluguel';
 
 
 class  Usuarios extends Model {
@@ -15,7 +16,7 @@ export const UsuariosModel =  Usuarios.init(
             type: Sequelize.INTEGER,
             autoIncrement: true,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
         },
         nome: {
             type: Sequelize.STRING,
@@ -33,6 +34,8 @@ export const UsuariosModel =  Usuarios.init(
     tableName: 'Usuarios',
     sequelize,
   });
+
+// AluguelModel.hasOne(UsuariosModel, {foreignKey:'id'})
 
 // console.log(User)
 // A validação de senha deve ser feita aqui
