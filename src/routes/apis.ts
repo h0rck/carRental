@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import aluguelController from '../app/controllers/aluguelController';
-// import authMiddleware from '../middleware/auth.js';
+import authMiddleware from '../middleware/auth';
 import authController from '../app/controllers/authController';
 import carrosController from '../app/controllers/carrosController';
 
@@ -15,6 +15,8 @@ export default (() => {
     api.post('/user/register', authController.register);
     api.post('/user/authenticate', authController.authenticate);
 
+    api.use(authMiddleware);
+
     api.get('/carros/all', carrosController.all);
     api.post('/carros/register', carrosController.register);
 
@@ -22,7 +24,7 @@ export default (() => {
     api.post('/aluguel/register', aluguelController.register);
 
 
-    // api.use(authMiddleware);
+
 
     return api;
 })()

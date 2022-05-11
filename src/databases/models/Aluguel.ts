@@ -1,44 +1,37 @@
-import Sequelize, {Model} from 'sequelize';
+import {
+  InferAttributes, InferCreationAttributes, CreationOptional,
+
+  Association, DataTypes, Model, Optional, NonAttribute, ForeignKey,
+} from 'sequelize';
+
 import {sequelize} from '../db';
-import { CarrosModel } from './Carros';
-import { UsuariosModel } from './Usuarios';
+import {Usuarios} from './Usuarios';
+import {Carros} from './Carros';
 
+class Aluguel extends Model<InferAttributes<Aluguel>, InferCreationAttributes<Aluguel>>{
+  declare id: CreationOptional<number>;
+  declare idUsuario:  ForeignKey<Usuarios['id']>;
+  declare idCarro: ForeignKey<Carros['id']>;
 
-class  Aluguel extends Model {
-  declare id:    number;
-  declare idUsuario: number;
-  declare idCarro:  number;
 }
-
-export const AluguelModel =  Aluguel.init(
+Aluguel.init(
     {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
-        },
-        idUsuario: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            references: {
-                model: UsuariosModel,
-                key: 'id'
-          }
-        },
-        idCarro: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          primaryKey: true,
-          references: {
-              model: CarrosModel,
-              key: 'id'
-          }
-        },
+        }
     },{
     tableName: 'Aluguel',
     sequelize,
   });
 
-AluguelModel.hasMany(UsuariosModel, {foreignKey:'id'})
-AluguelModel.hasMany(CarrosModel, {foreignKey:'id'})
+Aluguel.belongsTo(Carros, {targetKey:'id', foreignKey: 'idCarro'})
+
+
+export {Aluguel};
+
+
+
+// AluguelModel.hasMany(CarrosModel, {foreignKey:'id'})

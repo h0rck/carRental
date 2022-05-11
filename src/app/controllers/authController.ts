@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 // import bcrypt from 'bcryptjs';
 import jwt    from 'jsonwebtoken';
-import {UsuariosModel} from '../../databases/models/Usuarios';
+import {Usuarios} from '../../databases/models/Usuarios';
 import bcrypt   from 'bcryptjs';
 
 export default (() => {
 
     // Limpa o array 'user' para passar só os parâmetros necessários
     // Gera o token de segurança que serve para autentificar as apis
-    const generateToken =  (params:Number) => jwt.sign({params}, '0917B13A9091915D54B6336F45909539CCE452B3661B21F386418A257883B30A',{expiresIn: 86480,});
+    const generateToken =  (params:Number) => jwt.sign({params}, 'carRental123',{expiresIn: 86480,});
 
 
 
     async function all(req: Request, res:Response){
-        const users = await UsuariosModel.findAll();
+        const users = await Usuarios.findAll();
         return res.send(users);
     }
 
@@ -22,7 +22,7 @@ export default (() => {
         // try{
             const {nome,email,senha} = req.body;
 
-            const data = await UsuariosModel.create({
+            const data = await Usuarios.create({
                 nome,
                 email,
                 senha : await bcrypt.hash(senha, 2)
@@ -40,7 +40,7 @@ export default (() => {
     async function authenticate (req:Request, res:Response) {
         // try{
             const {email, senha} = req.body;
-            const data = await UsuariosModel.findOne({where: {email}});
+            const data = await Usuarios.findOne({where: {email}});
 
             if(!data) return res.status(404).send({error:'Usuário não encontrado'})
 

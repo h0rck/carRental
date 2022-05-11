@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Application} from 'express';
 import cors from 'cors';
 import apis from './routes/apis';
 import swaggerUi from 'swagger-ui-express';
@@ -7,14 +7,7 @@ import docs from './swagger.json';
 import 'dotenv/config';
 
 
-
-
-
-const app = express();
-
-
-
-
+const app:Application = express();
 
 /*
     Esse é o arquivo principal aqui tudo é montado

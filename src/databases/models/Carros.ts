@@ -1,40 +1,46 @@
-import Sequelize, {Model} from 'sequelize';
+import {
+  InferAttributes, InferCreationAttributes, CreationOptional,
+
+  Association, DataTypes, Model, Optional, NonAttribute, ForeignKey,
+} from 'sequelize';
 import {sequelize} from '../db';
 
 
-class Carros extends Model {
-  declare id:    number;
+class Carros extends Model<InferAttributes<Carros>, InferCreationAttributes<Carros>> {
+  declare id: CreationOptional<number>;
   declare marca:  string;
   declare modelo: string;
   declare placa: string;
   declare ano: number;
 }
 
-export const CarrosModel = Carros.init(
+Carros.init(
     {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
         marca: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         modelo:{
-            type :  Sequelize.STRING,
+            type :  DataTypes.STRING,
             allowNull: false,
         },
         placa:{
-            type :  Sequelize.STRING,
+            type :  DataTypes.STRING,
             allowNull: false,
         },
         ano:{
-            type :  Sequelize.INTEGER,
+            type :  DataTypes.INTEGER,
             allowNull: false,
         },
     },{
     tableName: 'Carros',
     sequelize,
   });
+
+export {Carros};

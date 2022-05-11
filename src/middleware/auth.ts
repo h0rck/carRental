@@ -14,6 +14,7 @@ import 'dotenv/config';
 export default (req:Request,res:Response,next:NextFunction) => {
     try{
         const authorization = req.headers.authorization;
+
         // verifica se o token foi passado no header
         if(!authorization) return res.status(401).send({erro: 'O token é necessário'});
 
@@ -24,7 +25,7 @@ export default (req:Request,res:Response,next:NextFunction) => {
         //     return res.status(401).send({error: 'Token invalido'});
 
         // valida o token usando o TOKEN do .env
-        jwt.verify(token, process.env.TOKEN_AUTH)
+        jwt.verify(token, 'carRental123')
         return next();
 
     }catch(err:any){
