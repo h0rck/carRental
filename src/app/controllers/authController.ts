@@ -19,7 +19,8 @@ export default (() => {
 
     //POST    Cria usuários
     async function register(req: Request, res:Response) {
-        // try{
+        try{
+            console.log(req.body)
             const {nome,email,senha} = req.body;
 
             const data = await Usuarios.create({
@@ -28,11 +29,11 @@ export default (() => {
                 senha : await bcrypt.hash(senha, 2)
             });
 
-            return res.send({user:{email:data.email,nome:data.nome}, token:generateToken(data.id)});
+            return res.send({usuarios:{email:data.email,nome:data.nome}, token:generateToken(data.id)});
 
-        // }catch(err:any){
-        //     return res.status(400).send({error:err.message, req:req});
-        // }
+        }catch(err:any){
+            return res.send({error:err?.message, req:req});
+        }
 
     }
 

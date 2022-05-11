@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url":"http:localhost:3000",
+      "url":"http://localhost:3000",
       "description":"DEV"
     }
   ],
@@ -28,7 +28,78 @@
                   "$ref": "#/components/schemas/Usuarios"
               },
               "examples":{
-                "Usuarios": {
+                "usuarios": {
+                  "value": {
+                    "nome": "Samuel Ribeiro",
+                    "email":"samukarp@outlook.com",
+                    "senha": "asd123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description":"OK",
+            "content": {
+              "applicaation/json":{
+                "schema":{
+                  "type":"object",
+                  "items":{
+                    "usuarios":{
+                      "nome":{
+                        "type":"string"
+                      },
+                      "email":{
+                        "type": "string"
+                      }
+                    },
+                    "token":{
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/all":{
+      "get":{
+        "summary": "Cadastro de produto",
+        "description": "Essa rota pega todos os usuarios",
+        "tags":["Usuarios"],
+        "responses": {
+          "200":{
+            "description":"OK",
+            "content": {
+              "applicaation/json":{
+                "schema":{
+                  "type":"object",
+                  "$ref":"#/components/schemas/Usuarios"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carros/register":{
+      "post":{
+        "summary": "Cadastro de produto",
+        "description": "Essa rota será responsável por cadastrar um novo produto",
+        "tags":["Usuarios"],
+        "security": [{"bearerAuth": [] }],
+        "requestBody":{
+          "content":{
+            "applicaation/json":{
+              "schema":{
+                  "$ref": "#/components/schemas/Usuarios"
+              },
+              "examples":{
+                "usuarios": {
                   "value": {
                     "name": "Samuel Ribeiro",
                     "email":"samukarp@outlook.com",
@@ -51,9 +122,9 @@
             "content": {
               "applicaation/json":{
                 "schema":{
+                  "type":"object",
                   "items":{
-                    "type":"object",
-                    "user":{
+                    "usuarios":{
                       "name":{
                         "type":"string"
                       },
@@ -74,19 +145,22 @@
     }
   },
   "components":{
-    "schemas":{
-      "Usuarios":{
+      "schemas":{
         "type":"object",
-        "name":{
-          "type":"string"
-        },
-        "email":{
-          "type": "string"
-        },
-        "senha": {
-          "type":"string"
+        "Usuarios":{
+          "id":{
+            "type":"number"
+          },
+          "name":{
+            "type":"string"
+          },
+          "email":{
+            "type": "string"
+          },
+          "senha": {
+            "type":"string"
+          }
         }
       }
     }
-  }
 }

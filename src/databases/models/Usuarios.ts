@@ -57,6 +57,7 @@ Usuarios.init(
         email:{
             type :  DataTypes.STRING,
             allowNull: false,
+            primaryKey: true,
         },
         senha:{
             type :  DataTypes.STRING,

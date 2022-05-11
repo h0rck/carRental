@@ -22,6 +22,7 @@ export default (() => {
 
     api.get('/aluguel/usuario/:id', aluguelController.usuario);
     api.post('/aluguel/register', aluguelController.register);
+    api.delete('/aluguel/delete/:id', aluguelController.destroy);
 
 
 

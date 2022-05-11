@@ -38,10 +38,19 @@ export default (() => {
         return res.send(data);
     }
 
+    async function destroy(req: Request, res:Response){
+        const {idUsuario,idCarro} = req.body;
+        const data = await Aluguel.create({
+          idUsuario, idCarro
+        });
+        return res.send(data);
+    }
+
 
     return {
         usuario,
-        register
+        register,
+        destroy
     };
 
 })()
