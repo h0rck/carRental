@@ -22,8 +22,6 @@ export default (() => {
           }
         }
       );
-
-      if(data) res.
       return res.send(data);
       }catch(err){
         console.log(err)
