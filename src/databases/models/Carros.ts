@@ -31,15 +31,16 @@ Carros.init(
             allowNull: false,
         },
         placa:{
-            type :  DataTypes.STRING,
+            type :  DataTypes.STRING(7),
             allowNull: false,
+            primaryKey: true
         },
         ano:{
             type :  DataTypes.INTEGER,
             allowNull: false,
         },
     },{
-    tableName: 'Carros',
+    tableName: 'carros',
     sequelize,
   });
 

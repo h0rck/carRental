@@ -10,7 +10,7 @@ import {
 } from 'sequelize';
 
 import {sequelize} from '../db';
-import {Aluguel} from './Aluguel';
+import {Aluguel} from './Reservas';
 
 
 class Usuarios extends Model<InferAttributes<Usuarios>, InferCreationAttributes<Usuarios>>{
@@ -64,7 +64,7 @@ Usuarios.init(
             allowNull: false,
         }
     },{
-    tableName: 'Usuarios',
+    tableName: 'usuarios',
     sequelize,
 });
 

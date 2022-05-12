@@ -11,7 +11,7 @@ import {Carros} from './Carros';
 class Aluguel extends Model<InferAttributes<Aluguel>, InferCreationAttributes<Aluguel>>{
   declare id: CreationOptional<number>;
   declare idUsuario:  ForeignKey<Usuarios['id']>;
-  declare idCarro: ForeignKey<Carros['id']>;
+  declare placa: ForeignKey<Carros['placa']>;
 
 }
 Aluguel.init(
@@ -23,11 +23,11 @@ Aluguel.init(
             primaryKey: true
         }
     },{
-    tableName: 'Aluguel',
+    tableName: 'reservas',
     sequelize,
   });
 
-Aluguel.belongsTo(Carros, {targetKey:'id', foreignKey: 'idCarro'})
+Aluguel.belongsTo(Carros, {targetKey:'placa', foreignKey: 'placa'})
 
 
 export {Aluguel};
